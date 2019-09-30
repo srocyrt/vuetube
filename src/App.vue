@@ -1,26 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <ModalWindow message="Connecting to Youtube API..." />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import ModalWindow from "./components/ModalWindow.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
-  }
+    ModalWindow
+  },
+  methods: {}
 };
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+</style>
+
+<style lang="stylus">
+@import "./reset.styl"
+
+body
+  overflow hidden
 </style>
