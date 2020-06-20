@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "IconCheck",
+  name: "IconDone",
   props: {
     color: {
       type: String,

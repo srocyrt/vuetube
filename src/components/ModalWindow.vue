@@ -1,36 +1,53 @@
 <template>
   <div class="modal">
     <div class="content">
-      <button type="button">&times;</button>
-      <component :is="iconType" size="60" />
+      <button v-if="showClose" @click="closeWindow()">&times;</button>
+      <component :is="iconType" :size="60" @finish="closeWindow()" />
       <p v-text="message"></p>
     </div>
   </div>
 </template>
 
 <script>
-import IconCheck from "./icons/IconCheck";
+import IconDone from "./icons/IconDone";
 import IconLoad from "./icons/IconLoad";
 
 export default {
   name: "ModalWindow",
   components: {
-    IconCheck,
+    IconDone,
     IconLoad
   },
   props: {
     type: {
       type: String,
-      default: "Default"
+      default: "default"
     },
     message: {
       type: String,
       default: ""
     }
   },
+  methods: {
+    closeWindow() {
+      this.$emit("close");
+    }
+  },
   computed: {
     iconType() {
-      return `Icon${this.type}`;
+      return `Icon${this.type.charAt(0).toUpperCase()}${this.type
+        .slice(1)
+        .toLowerCase()}`;
+    },
+    showClose() {
+      // TODO: Bad? OCP violation?
+      switch (this.type.toLowerCase()) {
+        case "load":
+        case "done":
+          return false;
+        default:
+          return true;
+      }
     }
   }
 };
@@ -71,6 +88,7 @@ button
   height 30px
   padding 2px
   border none
+  background transparent
   font-size 1em
   cursor pointer
   &:focus
